@@ -1,5 +1,3 @@
-const path = require('path')
-
 const expressEdge = require('express-edge')
 const express = require('express')
 
@@ -9,7 +7,15 @@ const bodyParser = require('body-parser')
 
 const fileUpload = require('express-fileupload')
 
-const Post = require('./database/models/Post')
+
+const createPostController = require('./controllers/createPost')
+
+const homePageController = require('./controllers/homePage')
+
+const storePostController = require('./controllers/storePost')
+
+const getPostController = require('./controllers/getPost')
+
 
 const app = new express()
 
@@ -40,62 +46,13 @@ const validateCreatePostMiddleware = (req, res, next) => {
 
 app.use('/posts/store', validateCreatePostMiddleware)
 
-app.get('/', async(req, res) => {
+app.get('/', homePageController);
 
-    const posts = await Post.find({})
+app.get('/post/:id', getPostController);
 
-    console.log(posts)
+app.get('/posts/new', createPostController);
 
-    res.render('index', {
-        posts
-    });
-
-});
-
-app.get('/about', (req, res) => {
-    res.render('about')
-});
-
-app.get('/post/:id', async(req, res) => {
-
-    const post = await Post.findById(req.params.id)
-
-    res.render('post', {
-        post
-    });
-
-});
-
-app.get('/contact', (req, res) => {
-    res.render('contact');
-
-});
-
-app.get('/posts/new', (req, res) => {
-    res.render('create');
-});
-
-app.post("/posts/store", (req, res) => {
-
-    // const { image } = req.files
-
-    let image = req.files.image;
-
-
-    image.mv(path.resolve(__dirname, 'public/posts', image.name), (error) => {
-
-        // console.log(req.files)
-        Post.create({
-            ...req.body,
-            image: `/posts/${image.name}`
-
-        }, (error, post) => {
-            res.redirect("/");
-        })
-
-    })
-
-});
+app.post("/posts/store", storePostController);
 
 
 app.listen(3000, () => {
