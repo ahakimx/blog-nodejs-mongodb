@@ -7,6 +7,10 @@ const bodyParser = require('body-parser')
 
 const fileUpload = require('express-fileupload')
 
+const expressSession = require('express-session')
+
+const connectMongo = require('connect-mongo')
+
 
 const createPostController = require('./controllers/createPost')
 
@@ -25,9 +29,22 @@ const loginController = require('./controllers/login')
 const loginUserController = require('./controllers/loginUser')
 
 
+
 const app = new express()
 
 mongoose.connect('mongodb://localhost/blog', { useNewUrlParser: true })
+
+
+const mongoStore = connectMongo(expressSession)
+
+app.use(expressSession({
+
+    secret: 'secret',
+    store: new mongoStore({
+        mongooseConnection: mongoose.connection
+    })
+}))
+
 
 app.use(fileUpload())
 
