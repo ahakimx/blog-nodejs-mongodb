@@ -1,5 +1,6 @@
 const Post = require('../database/models/Post')
 const path = require('path')
+const cloudinary = require('cloudinary')
 
 module.exports = (req, res) => {
 
@@ -7,19 +8,29 @@ module.exports = (req, res) => {
 
     let image = req.files.image;
 
+    const uploadPath = path.resolve(__dirname, '..', 'public/posts', image.name)
 
-    image.mv(path.resolve(__dirname, '..', 'public/posts', image.name), (error) => {
 
-        // console.log(req.files)
-        Post.create({
-            ...req.body,
-            image: `/posts/${image.name}`
+    image.mv(uploadPath, (error) => {
 
-        }, (error, post) => {
-            res.redirect("/");
+        cloudinary.v2.uploader.upload(uploadPath, (error, result) => {
+
+            if (error) {
+                return res.redirect('/');
+            }
+
+            Post.create({
+                ...req.body,
+                image: result.secure_url,
+                author: req.session.userId
+
+            }, (error, post) => {
+
+                console.log(post)
+
+                res.redirect("/");
+            })
+
         })
-
     })
-
-
 }

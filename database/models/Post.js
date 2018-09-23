@@ -5,8 +5,11 @@ const PostSchema = new mongoose.Schema({
     subtitle: String,
     content: String,
     image: String,
-    username: {
-        type: String
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+
     },
 
     createAt: {

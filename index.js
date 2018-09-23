@@ -1,8 +1,12 @@
+require('dotenv').config()
+
 const expressEdge = require('express-edge')
 
 const express = require('express')
 
 const edge = require('edge.js')
+
+const cloudinary = require('cloudinary')
 
 const mongoose = require('mongoose')
 
@@ -39,16 +43,24 @@ const logoutController = require('./controllers/logout.js')
 
 const app = new express()
 
-mongoose.connect('mongodb://localhost/blog', { useNewUrlParser: true })
+mongoose.connect(process.env.DB_URI, { useNewUrlParser: true })
 
 app.use(connectFlash())
+
+
+cloudinary.config({
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    cloud_name: process.env.CLOUDINARY_NAME,
+
+})
 
 
 const mongoStore = connectMongo(expressSession)
 
 app.use(expressSession({
 
-    secret: 'secret',
+    secret: process.env.EXPRESS_SESSION_KEY,
     store: new mongoStore({
         mongooseConnection: mongoose.connection
     })
@@ -87,7 +99,7 @@ app.get('/posts/new', auth, createPostController);
 
 app.post("/posts/store", auth, storePost, storePostController);
 
-app.get('/auth/logout', redirectIfAuthenticated, logoutController)
+app.get('/auth/logout', auth, logoutController)
 
 app.get('/auth/login', redirectIfAuthenticated, loginController)
 
@@ -97,9 +109,11 @@ app.get('/auth/register', redirectIfAuthenticated, createUserController)
 
 app.post('/users/register', redirectIfAuthenticated, storeUserController)
 
+app.use((req, res) => res.render('not-found'))
 
 
 
-app.listen(3000, () => {
-    console.log('App listening on port 3000!');
+
+app.listen(process.env.PORT, () => {
+    console.log(`App listening on port ${process.env.PORT}`);
 });
