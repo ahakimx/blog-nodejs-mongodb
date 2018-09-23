@@ -7,11 +7,15 @@ const mongoose = require('mongoose')
 
 const bodyParser = require('body-parser')
 
+const fileUpload = require('express-fileupload')
+
 const Post = require('./database/models/Post')
 
 const app = new express()
 
 mongoose.connect('mongodb://localhost/blog', { useNewUrlParser: true })
+
+app.use(fileUpload())
 
 app.use(express.static('public'))
 
@@ -59,10 +63,23 @@ app.get('/posts/new', (req, res) => {
     res.render('create');
 });
 
-app.post('/posts/store', (req, res) => {
+app.post("/posts/store", (req, res) => {
 
-    Post.create(req.body, (error, post) => {
-        res.redirect('/');
+    // const { image } = req.files
+
+    let image = req.files.image;
+
+
+    image.mv(path.resolve(__dirname, 'public/posts', image.name), (error) => {
+
+        // console.log(req.files)
+        Post.create({
+            ...req.body,
+            image: `/posts/${image.name}`
+
+        }, (error, post) => {
+            res.redirect("/");
+        })
 
     })
 
