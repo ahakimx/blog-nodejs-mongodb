@@ -1,4 +1,4 @@
-# blog-nodejs-mongodb
+# create blog using nodejs & mongodb
 - nodejs
 - expressjs
 - mongodb
