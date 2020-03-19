@@ -1,29 +1,38 @@
 {
-    "name": "blog",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "start": "nodemon index.js"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "bcrypt": "^3.0.1",
-        "body-parser": "^1.18.3",
-        "cloudinary": "^1.11.0",
-        "connect-flash": "^0.1.1",
-        "connect-mongo": "^2.0.1",
-        "dotenv": "^6.0.0",
-        "edge.js": "^1.1.4",
-        "express": "^4.16.3",
-        "express-edge": "^1.0.0",
-        "express-fileupload": "^1.0.0-alpha.1",
-        "express-session": "^1.15.6",
-        "mongoose": "^5.2.17"
-    },
-    "devDependencies": {
-        "nodemon": "^1.18.4"
-    }
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "![](https://img.shields.io/badge/nodejs-8.11.2-green.svg) ![](https://img.shields.io/badge/mongodb-3.4.15-green.svg) ![](https://img.shields.io/badge/expressjs-4.16-green.svg)",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.1",
+    "body-parser": "^1.18.3",
+    "cloudinary": "^1.11.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.2.0",
+    "dotenv": "^6.0.0",
+    "edge.js": "^1.1.4",
+    "express": "^4.16.3",
+    "express-edge": "^1.0.0",
+    "express-fileupload": "^1.0.0-alpha.1",
+    "express-session": "^1.15.6",
+    "mkdirp": "^1.0.3",
+    "mongoose": "^5.2.17"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahakimx/blog-nodejs-mongodb.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ahakimx/blog-nodejs-mongodb/issues"
+  },
+  "homepage": "https://github.com/ahakimx/blog-nodejs-mongodb#readme"
 }
