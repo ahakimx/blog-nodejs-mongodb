@@ -4,13 +4,13 @@
   "description": "![](https://img.shields.io/badge/nodejs-8.11.2-green.svg) ![](https://img.shields.io/badge/mongodb-3.4.15-green.svg) ![](https://img.shields.io/badge/expressjs-4.16-green.svg)",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.1",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.3",
     "cloudinary": "^1.11.0",
     "connect-flash": "^0.1.1",
@@ -25,7 +25,7 @@
     "mongoose": "^5.2.17"
   },
   "devDependencies": {
-    "nodemon": "^1.18.4"
+    "nodemon": "^2.0.7"
   },
   "repository": {
     "type": "git",

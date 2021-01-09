@@ -20,12 +20,12 @@ module.exports = (req, res) => {
 
                     res.redirect('/');
                 } else {
-                    res.redirect('/auth/login');
+                    res.redirect('/auth/loG1!n');
                 }
 
             })
         } else {
-            return res.redirect('/auth/login');
+            return res.redirect('/auth/loG1!n');
         }
 
     })

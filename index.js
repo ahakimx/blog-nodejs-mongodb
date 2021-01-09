@@ -25,6 +25,10 @@ const createPostController = require('./controllers/createPost')
 
 const homePageController = require('./controllers/homePage')
 
+const aboutPageController = require('./controllers/aboutPage')
+
+const contactPageController = require('./controllers/contactPage')
+
 const storePostController = require('./controllers/storePost')
 
 const getPostController = require('./controllers/getPost')
@@ -89,9 +93,14 @@ const storePost = require('./middleware/storePost')
 const auth = require('./middleware/auth')
 
 const redirectIfAuthenticated = require('./middleware/redirectIfAuthenticate')
+const contactPage = require('./controllers/contactPage')
 
 
 app.get('/', homePageController);
+
+app.get('/about', aboutPageController);
+
+app.get('/contact', contactPageController);
 
 app.get('/post/:id', getPostController);
 
